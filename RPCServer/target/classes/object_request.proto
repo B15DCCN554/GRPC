@@ -1,0 +1,43 @@
+syntax = "proto3";
+package protoGen;
+option java_multiple_files = true;
+
+service MNP{
+  rpc insert(ObjectRequest) returns (ObjectResponse);
+  rpc reload(Empty) returns (ObjectResponse);
+  rpc findRmnByDestination(Destination) returns (ObjectRequest);
+}
+
+message ObjectRequest{
+  string appId = 1;
+  string mnpId = 2;
+  string destination = 3;
+  string providerId = 4;
+  string status = 5;
+  string startTime = 6;
+  string createDate = 7;
+  string modifyDate = 8;
+  string createUser = 9;
+  string originProviderId = 10;
+  string providerName = 11;
+  int64 requestTime = 12;
+}
+
+message ObjectResponse{
+  string appId = 1;
+  enum Status {
+    OK = 0;
+    VALIDATE = 1;
+  }
+  Status code = 2;
+  string message = 3;
+  int64 responseTime = 4;
+}
+
+message Empty{
+
+}
+
+message Destination{
+  string destination = 1;
+}
